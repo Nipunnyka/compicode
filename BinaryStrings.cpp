@@ -6,12 +6,10 @@ using namespace std;
 
 bool isGreater(string s){
     //tells if a strings is greater than zero
-    int l=s.length();
-    bool flag=false;
-    for(int i=0; i++; i<l){
-        if(s[i]==1){flag=true; break;}
+    for(int i=0; i<s.length(); i++){
+        if(s[i]=='1') return true;
     }
-    return flag;
+    return false;
 }
 
 //only multiplies by powers of two
@@ -19,6 +17,7 @@ string multiply(string s, int mul){
     //only multiplies by powers of two
     int fac=log2(mul);
     s.resize(s.length()+fac, '0');
+    return s;
 }
 
 string ands(string s1, string s2){
@@ -38,7 +37,7 @@ string ands(string s1, string s2){
         }
     }
     reverse(ans.begin(), ans.end());
-    cout<<ans<<endl;
+    //cout<<ans<<endl;
     return ans;
 }
 string xors(string s1, string s2){
@@ -53,7 +52,7 @@ string xors(string s1, string s2){
         ans=(i<j?s2:s1);
         flag=false;
     }
-    cout<<"initial"<<" "<<ans<<endl;
+    //cout<<"initial"<<" "<<ans<<endl;
     //bool flag=false; //tells if either of the string is at 0
     while((i>=0 || j>=0 )&& flag){
         if(i>=0 && j>=0){
@@ -74,7 +73,7 @@ string xors(string s1, string s2){
     }
    
     if(flag)reverse(ans.begin(), ans.end());
-    cout<<ans<<endl;
+   // cout<<ans<<endl;
     return ans;
 }
 
