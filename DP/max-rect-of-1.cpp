@@ -44,8 +44,13 @@ using namespace std;
     }
 
 int main(){
-	vector<int> height={1,2,3,4,5,3,3,2,1};
-	int ans= largestRectangleArea(height);
+	vector<vector<char>> height={
+						{'1','0','1','0','0'},
+						{'1','0','1','1','1'},
+						{'1','1','1','1','1'},
+						{'1','0','0','1','0'}
+					};
+	int ans= maximalRectangle(height);
 	cout<<ans;
 	
 	return 0;
