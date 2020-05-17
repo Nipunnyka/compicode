@@ -2,8 +2,14 @@
 using namespace std;
 //int arr[1000000];
 int tmp, t;
-string brick[40][40];
-string dp[40]={""};
+char brick[40][40];
+string dp[40];
+
+bool compare(string a, string b){
+    //cout << "compare(" << a << "," << b << ")" << endl;
+    return (a.compare(b) < 0);
+}
+
 int main(){
     cin>>t;
     tmp=t;
@@ -20,8 +26,10 @@ int main(){
         for(int col=0; col<c; col++){
             string s="";
             int pos=-1;
-            for(int row=r-1; row>=0; row++){
-                string cur=brick[row][col];
+            for(int row=r-1; row>=0; row--){
+                char cu=brick[row][col];
+                string cur(1, cu);
+                //cout<<"check cur "<<cur;
                 size_t found=s.find(cur);
                 if(pos==-1){
                     s=s+cur;
@@ -32,6 +40,8 @@ int main(){
                     pos++;
                 }
                 else if(found<pos){
+					cout<<found<<" check "<<pos<<endl;
+					//cout<<"s is here: "<<s<<endl;
 					flag=true;
 				}   
             }
@@ -47,15 +57,21 @@ int main(){
         if(ans=="-1")
 		{cout<<"Case #"<<tmp-t<<": "<<ans<<endl; }
 		else{
-			 cout<<"Case #"<<tmp-t<<": "<<endl; 
-			 for(int i=0; i<c; i++)
-				cout<<dp[i]<<" ";
-			cout<<endl;
+			//sort(dp.begin(), dp.end());
+			cout<<"Case #"<<tmp-t<<": "<<endl; 
+			vector<string> myvector (dp, dp+ c);               
+			vector<string>::iterator it;
+
+			sort (myvector.begin(), myvector.end(), compare);
+
+			//cout << "vector contains:";
+			for (it=myvector.begin(); it!=myvector.end(); ++it)
+				cout << " " << *it;
+		
+			cout << endl;
         }
 	}
     
-    
-	
     return 0;
 }
 
