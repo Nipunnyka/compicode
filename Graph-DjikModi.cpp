@@ -12,14 +12,13 @@ Write your code in this editor and press "Run" button to compile and execute it.
 *******************************************************************************/
 
 #include <iostream>
-#include <bits/stdc++.h>
-
-#define ll long long
-#define pb push_back
-#define mp make_pair
+#include<bits/stdc++.h>
 #define fi first
 #define se second
 #define pi pair<int, int>
+#define pb push_back
+#define mp make_pair
+
 using namespace std;
 
 struct myComp { 
@@ -34,37 +33,34 @@ struct myComp {
 
 class Graph{
     public:
-    int n; //vertices;
-    int m; //edges
-    list<pair<int ,int>> *adj;
-    
+    int n;
+    int m;
+    vector<vector<pi>> adj;
     
     Graph(int n, int m){
         this->n=n;
         this->m=m;
-        adj=new list<pi>(n);
-    }
-    
-    Graph(int n){
-        this->n=n;
-        m=n-1;
-        adj=new list<pi>;
+        vector<vector<pi>> adj;
     }
     
     void inputGraph(){
         cout<<"input edges"<<endl;
+        adj.resize(n);
         while(m--){
             int src,dest,wt;
             scanf("%d", &src);
             scanf("%d", &dest);
             scanf("%d", &wt);
             adj[src].pb(mp(dest,wt));
+            adj[dest].pb(mp(src,wt));
         }
+        cout<<"input end"<<endl;
     }
     
     int inputGraphModified(){
         int count=0;
-        cout<<"input edges"<<endl;
+        adj.resize(n);
+        cout<<"input edges: "<<m<<endl;
         while(m--){
             int src,dest,wt;
             scanf("%d", &src);
@@ -74,15 +70,17 @@ class Graph{
                 count++;
             }
             adj[src].pb(mp(dest,wt));
+            adj[dest].pb(mp(src,wt));
         }
         return count;
     }
     
-    //virtual ~Graph();
+    ~Graph(){
+        cout<<"";
+    }
     
 };
 
-//returns the prev array and cost
 pair<int, vector<int>> djikstraModi(Graph g, int s, int t){
     priority_queue<pair<int, int>, vector<pair<int, int>>, myComp> pq;
     vector<int> dist(g.n, INT_MAX);
@@ -116,7 +114,7 @@ pair<int, vector<int>> djikstraModi(Graph g, int s, int t){
     }
 }
 
-void solve(Graph G, int l, int s, int t, int countZeros){
+void solve(Graph G, int l, int s, int t, int countZeroes){
     vector<int> path;
     int cost=0;
     pair<int, vector<int>> p=djikstraModi(G,s,t);
@@ -158,15 +156,12 @@ void solve(Graph G, int l, int s, int t, int countZeros){
 
 int main()
 {
-    int n, m;
-    //Graph G;
-    cout<<"enter num of vertice and edges"<<endl;
-    cin>>n>>m;
-    Graph G(n,m);
-    cout<<"enter l s t"<<endl;
-    int l, s, t;
-    cin>>l>>s>>t;
-    int countZeros=G.inputGraphModified();
-    solve(G, l, s, t, countZeros);
+    int n, m, l, s, t;
+    cout<<"enter n m l s t"<<endl;
+    cin>>n>>m>>l>>s>>t;
+    Graph g(n,m);
+    int countZeroes=g.inputGraphModified();
+    solve(g, l, s, t, countZeroes);
+
     return 0;
 }
