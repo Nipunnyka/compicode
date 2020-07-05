@@ -48,11 +48,11 @@ class Graph{
         adj.resize(n);
         while(m--){
             int src,dest,wt;
-            scanf("%d", &src);
-            scanf("%d", &dest);
-            scanf("%d", &wt);
+            cin>>src>>dest>>wt;
+            //cout<<"going to enter now";
             adj[src].pb(mp(dest,wt));
             adj[dest].pb(mp(src,wt));
+            cout<<"m: "<<m<<endl;
         }
         cout<<"input end"<<endl;
     }
@@ -60,18 +60,19 @@ class Graph{
     int inputGraphModified(){
         int count=0;
         adj.resize(n);
-        cout<<"input edges: "<<m<<endl;
+        //cout<<"input edges: "<<m<<endl;
         while(m--){
             int src,dest,wt;
-            scanf("%d", &src);
-            scanf("%d", &dest);
-            scanf("%d", &wt);
+                        cin>>src>>dest>>wt;
+
             if(wt==0){
                 count++;
             }
             adj[src].pb(mp(dest,wt));
             adj[dest].pb(mp(src,wt));
+            //cout<<"m: "<<m<<endl;
         }
+        //cout<<"ending now"<<endl;
         return count;
     }
     
@@ -95,6 +96,11 @@ pair<int, vector<int>> djikstraModi(Graph g, int s, int t){
         int index=p.fi;
         int minVal=p.se;
         visited[index]=true;
+
+        if(index==t){
+            return mp(dist[t], prev);
+        }
+
         if(dist[index]>=minVal){
             //explore neighbours 
             for(auto it=g.adj[index].begin(); it!=g.adj[index].end(); it++){
@@ -107,9 +113,7 @@ pair<int, vector<int>> djikstraModi(Graph g, int s, int t){
                     }
                 }
             }
-            if(index==t){
-                return mp(dist[t], prev);
-            }
+            
         }
     }
 }
@@ -118,46 +122,77 @@ void solve(Graph G, int l, int s, int t, int countZeroes){
     vector<int> path;
     int cost=0;
     pair<int, vector<int>> p=djikstraModi(G,s,t);
-    if(p.fi==l){
-        cout<<"yes";
-        return;
-    }
+    
     
     //find num of zeros in path;
     vector<int> prev=p.se;
+    //for(auto it=prev.begin(); it!=prev.end(); it++){
+    //    cout<<*it<<" ";
+    //}
+    //cout<<endl;
     int index=t;
     path.pb(index);
     int count=0;
-    while(prev[index]!=index){
+    vector<pi> zeroWtPos;
+    while(prev[index]!=INT_MAX){
         path.pb(prev[index]);
-        for(auto it=G.adj[prev[index]].begin(); it!=G.adj[prev[index]].end(); it++){
-            if((*it).se==0 && (*it).fi==index)
-                count++;
+        for(auto it=G.adj[index].begin(); it!=G.adj[index].end(); it++){
+            if((*it).se==0 && (*it).fi==prev[index])
+            {   count++;
+                zeroWtPos.pb(mp(index, prev[index]));
+            }
         }
+        index=prev[index];
     }
-    
-    if(p.fi<l && count==0){
-        cout<<"no"<<endl;
+    //cout<<"count of zeros in path is"<<count<<endl;
+ 
+    if(p.fi==l && count>0){
+        cout<<"NO";
+        return;
+    }
+
+    if(p.fi<l && (count==0 || (l-p.fi)<count)){
+        cout<<"NO";
         return;
     }
     
-    else if(p.fi>l && count>0){
-        cout<<"no"<<endl;
+    else if(p.fi>l){
+        cout<<"NO";
         return;
     }
     
+    else{
+        cout<<"YES"<<endl;
+        //unordered_map<pi, bool> vis(G.n, false);
+        //pi temp=zeroWtPos[0];
+        //G.adj[temp.fi]=mp(temp.se, l-p.fi-count+1);
+        //G.adj[temp.se]=mp(temp.fi, l-p.fi-count+1);
+        ////print all edges
+        //for(int i=0; i<G.n; i++){
+        //    //print all neighbours
+        //    for(auto it=G.adj[i].begin(); it!=G.adj[i].end(); it++){
+        //        if(!(vis[mp(i, (*it).fi)] || vis[mp((*it).fi, i)])){
+        //            vis[mp(i, *it.fi)]=true;
+        //            (*it).se=(*it).se==0? 1:*it.se;
+        //            cout<<i<<" "<(*it).fi<<" "<<(*it).se<<endl;
+        //        }
+        //    }
+        //}
+        return;
+    }
+
     //PATH IS REVERSED
     //when will ans be no
         //1. no zeros and path <l
         
-        //2. zeros and path>L
+        //2. path>L
      
 }
 
 int main()
 {
     int n, m, l, s, t;
-    cout<<"enter n m l s t"<<endl;
+    //cout<<"enter n m l s t"<<endl;
     cin>>n>>m>>l>>s>>t;
     Graph g(n,m);
     int countZeroes=g.inputGraphModified();
