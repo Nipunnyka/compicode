@@ -13,3 +13,4 @@
 ## Modular Exponentiation
 - to calc (x^y)%m, complexity: O(logy)
 - how: ![iage of Mod Expo](/number_theory/images_nt/mod-expo.png)
+- code [here][ModularExponentiation.cpp]
