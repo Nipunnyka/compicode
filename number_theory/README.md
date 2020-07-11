@@ -1,4 +1,4 @@
-# Number Theoru for Compettitive Programming
+# Number Theory for Competitive Programming
 
 ## Sieve of Eratosthenos
 - given n, returns all the primes less than or equal to n
@@ -8,7 +8,7 @@
 
 ## Euler Totient Function
 - given n, returns the number integers <=n which are co primes with n
-- how: ![image of Euler Totient](/number_theory/images_nt/euler_totient.png)
+- how: ![image of Euler Totient](/number_theory/images_nt/euler-totient.png)
 
 ## Modular Exponentiation
 - to calc (x^y)%m, complexity: O(logy)
@@ -25,7 +25,7 @@
 
 ## Efficient Prime Factorization
 - why does it work?
- - uses a sieve, no time wasted checking if a number is prime
- - only goes upto sqrt(n)
- - uses divide and conquer, if n=pf*n', in next iteration n=n'
+    - uses a sieve, no time wasted checking if a number is prime
+    - only goes upto sqrt(n)
+    - uses divide and conquer, if n=pf*n', in next iteration n=n'
 - O(sqrt(n)/ln(sqrt(n)))
