@@ -14,3 +14,18 @@
 - to calc (x^y)%m, complexity: O(logy)
 - how: ![iage of Mod Expo](/number_theory/images_nt/mod-expo.png)
 - code [here][ModularExponentiation.cpp]
+
+## Optimized isPrime
+- check if n is divisible by primes unto sqrt(n)
+- O(sqrt(n)/ln(sqrt(n)))
+
+## GCD and LCM
+- for three num gcd(a,gcd(b,c)), same with lcm
+- o(logn), n=max(a,b)
+
+## Efficient Prime Factorization
+- why does it work?
+ - uses a sieve, no time wasted checking if a number is prime
+ - only goes upto sqrt(n)
+ - uses divide and conquer, if n=pf*n', in next iteration n=n'
+- O(sqrt(n)/ln(sqrt(n)))
