@@ -29,3 +29,6 @@
     - only goes upto sqrt(n)
     - uses divide and conquer, if n=pf*n', in next iteration n=n'
 - O(sqrt(n)/ln(sqrt(n)))
+
+## Modified Sieve
+- if the range of quesrues for number of different prime factors of a number is large then prefer Modified Sieve algo, also applicable in Euler-Totient function

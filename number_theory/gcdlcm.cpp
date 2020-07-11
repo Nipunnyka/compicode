@@ -23,7 +23,7 @@ ll lcm(ll a, ll b){
 }
 
 int main(){
-    ll a=98, b=98765;
+    ll a=1, b=3;
     cout<<gcd(a,b)<<" "<<lcm(a,b);
     return 0;
 }
