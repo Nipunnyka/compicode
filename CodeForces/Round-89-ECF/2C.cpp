@@ -45,7 +45,7 @@ void solve(){
         for(auto &e: dp[0][i-1]){
             if(e.fi+1<n && dp[0][i].find(mp(e.fi+1,e.se))==dp[0][i].end())
             {   dp[0][i].insert(mp(e.fi+1,e.se));
-                if(matrix[e.fi+1][e.se])
+                if(matrix[e.fi+1][e.se]==1)
                     num1++;
                 else 
                     num0++;
@@ -53,7 +53,7 @@ void solve(){
             if(e.se+1<m && dp[0][i].find(mp(e.fi,e.se+1))==dp[0][i].end())
             {   dp[0][i].insert(mp(e.fi,e.se+1));
                 
-                if(matrix[e.fi][e.se+1])
+                if(matrix[e.fi][e.se+1]==1)
                     num1++;
                 else 
                     num0++;
@@ -63,6 +63,24 @@ void solve(){
         bool flag1=false;
         if(num1>num0)
             flag1=true;
+        if(flag1){
+            for(auto &e: dp[0][i]){
+                if(matrix[e.fi][e.se]==0)
+                {   matrix[e.fi][e.se]==1; 
+                    moves++;
+                }
+            }
+        }
+        else{
+            for(auto &e: dp[0][i]){
+                cout<<e.fi<<", "<<e.se<<endl;
+                if(matrix[e.fi][e.se]==1)
+                {   matrix[e.fi][e.se]==0; 
+                    moves++;
+                    cout<<"changed to zero";
+                }
+            }
+        }
         for(auto &e: dp[1][i-1]){
             if(e.fi-1>0 && dp[1][i].find(mp(e.fi-1,e.se))==dp[1][i].end())
             {   dp[1][i].insert(mp(e.fi-1,e.se));
