@@ -59,25 +59,38 @@ vector<ll> Sieve(ll n){
     return ans;
 }
 
-vector<pair<ll, int>> primeFactors(ll n){
-    vector<pair<ll, int>> factors;
-
+pl primeFactors(ll n){
+    
     ll pf_index=0;
     ll pf=primes[pf_index];
-
+    ll one=1, two=1;
+    bool flag=false;
+    ll copyn=n;
     while(pf*pf<n){
         int count=0;
         while(n%pf==0){
+            if(n==copyn)
+                flag=true;
+            if(flag)
+            {
+                one=pf;
+                flag=false;
+            }
             n=n/pf;
             count++;
         }
         if(count)
-            factors.pb(mp(pf, count));
+            two=two*pf;
         pf=primes[++pf_index];
     }
     if(n!=1)
-        factors.pb(mp(n,1));
-    return factors;
+        two=two*n;
+    if(one==1)
+        return mp(-1,-1);
+    two=two/one;
+    if(two==1)
+        return mp(-1,-1);
+    return mp(one,two);
 }
 
 int main(){
@@ -95,27 +108,8 @@ int main(){
     }
     vector<pl> ans;
     for(auto &e: arr){
-        vector<pair<ll, int>> factors=primeFactors(e);
-        //check if primes>1
-        if(factors.size()<2)
-        {
-            ans.pb(mp(-1,-1));
-            continue;
-        }
-        bool flag=false;
-        //check if number itself is a prime
-        if(factors[factors.size()-1].fi==e){
-            flag=true;
-        }
-        ll second=0;
-        for(auto &it: factors){
-            second+=it.fi;
-        }
-        if(flag)
-            second-=e;
-        auto it=factors.begin();
-        second-=ptr.fi;
-        ans.pb(mp(ptr.fi, second));
+        pl temp=primeFactors(e);
+        ans.pb(temp);
     }
 
     for(auto &e: ans)
