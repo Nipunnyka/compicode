@@ -17,21 +17,49 @@ int main()
     FAST;
     ll n;
     cin>>n;
-
-    ll k=(n-1)/2;
     vl arr(n);
-    for(ll i=0; i<n; i++)
-        cin>>arr[i];
-    sort(arr.begin(), arr.end());
-    ll ans=0, i=0;
-    for(auto it=arr.begin(); it!=arr.end(); it++, i++){
-        if(i<k)
-            continue;
-        else{
-            ans+=ptr;
+    
+    vl odd;
+    vl even;
+
+    for(int i=0; i<n; i++){
+        ll t;
+        cin>>t;
+        arr[i]=t;
+        if(i%2==0){
+            //odd pos
+            odd.pb(t);
+        }
+        else
+        {
+            //even pos
+            even.pb(t);
+        }
+        if(n==1){
+            cout<<t<<endl;
+            return 0;
         }
     }
-    cout<<ans<<endl;
+
+    for(auto &e: odd){
+        even.pb(e);
+    }
+
+    int w=(n+1)/2;
+    ll tot=0;
+    for(int i=0; i<w; i++)
+        tot+=even[i];
+
+    ll maxi=INT_MIN;
+    ll cur=tot;
+    for(int i=w; i<n; i++)
+    {
+        cur-=even[i-w];
+        cur+=even[i];
+        if(cur>tot)
+            tot=cur;
+    }
+    cout<<tot<<endl;
     return 0;
 
 }
