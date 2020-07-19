@@ -20,26 +20,35 @@
 using namespace std;
 
 void solve(){
-    int n; 
+    int n;
+    FAST;
+    int v[100];
     cin>>n;
-    set<int> ans;
-
-    for(int i=0; i<(2*n); i++){
-        int t;
-        cin>>t;
-        if(ans.find(t)==ans.end()){
-            ans.insert(t);
-            cout<<t<<" ";
-        }
+    int bad_even=0, bad_odd=0;
+    for(int i=0; i<n; i++)
+    {   
+        cin>>v[i];
+        int t=v[i]%2;
+        if(i%2==0&&t==1)
+            bad_odd++;
+        else if(i%2==1&&t==0)
+            bad_even++;
     }
-    cout<<endl;
+    if(bad_even!=bad_odd){
+        cout<<-1<<endl;
+        return;
+    }
+    else{
+        cout<<(bad_odd)<<endl;
+        return;
+    }
 }
 
 int main(){
     int t;
+    FAST;
     cin>>t;
     while(t--){
         solve();
     }
-    return 0;
 }

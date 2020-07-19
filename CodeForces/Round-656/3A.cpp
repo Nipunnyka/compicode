@@ -20,8 +20,38 @@
 using namespace std;
 
 void solve(){
-    
+    int x,y,z;
+    cin>>x>>y>>z;
 
+    int equal=0, nonequal=0;
+    if(x==y){
+        equal=x;
+        nonequal=z;
+    }
+    else if(y==z){
+        equal=y;
+        nonequal=x;
+    }
+    else if(x==z){
+        equal=z;
+        nonequal=y;
+    }
+    
+    if(equal==0){
+        cout<<"NO"<<endl;
+        return;
+    }
+
+    int maxi=max(x,max(y,z));
+    if(maxi>equal){
+        cout<<"NO"<<endl;
+        return;
+    }
+
+    else{
+        cout<<"YES"<<endl<<maxi<<" "<<nonequal<<" "<<nonequal<<endl;
+        return;
+    }
 }
 
 int main(){

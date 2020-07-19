@@ -20,26 +20,21 @@
 using namespace std;
 
 void solve(){
-    int n; 
-    cin>>n;
-    set<int> ans;
-
-    for(int i=0; i<(2*n); i++){
-        int t;
-        cin>>t;
-        if(ans.find(t)==ans.end()){
-            ans.insert(t);
-            cout<<t<<" ";
-        }
+    string s;
+    FAST;
+    cin>>s;
+    for(int i=0; i<=s.size()-2; i+=2){
+        cout<<s[i];
     }
-    cout<<endl;
+    cout<<s[s.size()-1]<<endl;
+    return;
 }
 
 int main(){
     int t;
+    FAST;
     cin>>t;
     while(t--){
         solve();
     }
-    return 0;
 }

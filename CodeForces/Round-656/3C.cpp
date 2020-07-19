@@ -20,7 +20,50 @@
 using namespace std;
 
 void solve(){
+    int n;
+    cin>>n;
+    vi v(n, 0);
+    for(int i=0; i<n ; i++)
+        cin>>v[i];
     
+    bool flag=true;
+    for(int i=1; i<n; i++){
+        if(v[i]<v[i-1]){
+            flag=false;
+        }
+    }
+
+    if(flag){
+        cout<<"0"<<endl;
+        return;
+    }
+
+    int descStart=v.size()-1;
+
+    for(int i=v.size()-2; i>=0; i--){
+        if(v[i]<v[i+1]){
+            break;
+        }
+        descStart=i;
+    }
+
+    if(descStart==0){
+        cout<<0<<endl;
+        return;
+    }
+
+    int ascEnd=descStart-1;
+    int ascStart=ascEnd;
+    for(int i=ascEnd; i>=1; i--){
+        if(v[i-1]>v[i])
+            break;
+        ascStart=i-1;
+    }
+
+    cout<<ascStart<<endl;
+    return;
+
+
 
 }
 
