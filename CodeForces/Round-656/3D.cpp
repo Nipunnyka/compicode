@@ -35,6 +35,7 @@ int util(string s, char c){
         k++;
     }
 
+    int moves=0;
     int last=(int)c+k;
 
     int left_c=0, left_valid=0, right_c=0, right_valid=0;
@@ -50,6 +51,11 @@ int util(string s, char c){
             right_c++;
         else if((int)e<last && (int)e>(int)c)
             right_valid++;
+    }
+
+    if(left_c>=right_c){
+        moves=(n/2)-left_c
+        
     }
 
     return k;
