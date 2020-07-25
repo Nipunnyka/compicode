@@ -20,14 +20,12 @@
 using namespace std;
 
 void solve(){
-    
+
+
 }
 
 int main(){
-    int t;
-    FAST;
-    cin>>t;
-    while(t--){
-        solve();
-    }
+    int v=2;
+    v+=v++;
+    cout<<v;
 }
