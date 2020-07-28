@@ -8,7 +8,7 @@ string getString(char c){
 }
 
 
-////////************STRING TEMP END**************/////////////
+////////************STRING TEMP END*************/////////////
 
 void removeUtil(char *s, int n, string &ans, char lastRemoved){
     if(n==0){
