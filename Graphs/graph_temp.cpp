@@ -8,6 +8,7 @@
 #define mp make_pair
 #define ptr (*it)
 #define vi vector<int>
+#define vpi vector<pi>
 using namespace std;
 
 #include <string_view>
@@ -49,14 +50,15 @@ class Graph{
 
     void inputGraph(){
         cout<<"input edges"<<endl;
+        vpi p(100, mp(0,0));
         adj.resize(n);
         while(m--){
             int src,dest,wt;
-            cin>>src>>dest;
-            wt=1;
+            cin>>src>>dest>>wt;
             adj[src].pb(mp(dest,wt));
+            cout<<"added: "<<src<<" "<<dest<<" "<<wt<<endl;
         }
-        cout<<"input end"<<endl;
+        cout<<"check";
     }
 
     void printGraph(){
@@ -113,6 +115,7 @@ class Graph{
     }
     //returns the min move to reach dest
     int bfsPathSearch(int src, int end){
+        cout<<"here";
         if(src==end)
             return 0;
         int moves=0;
@@ -152,12 +155,12 @@ class Graph{
             return -1;
     }
 
+
 };
 
 int main(){
-
-    Graph g(3,0);
+    int n; cin>>n;
+    Graph g(n, n-1);
     g.inputGraph();
-
     return 0;
 }

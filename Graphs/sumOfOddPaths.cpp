@@ -24,7 +24,7 @@ int main() {
 #define se second
 
 using namespace std;
-long long final=0;
+long long fin=0;
 class Graph{
 	public:
 	int n; 
@@ -34,21 +34,25 @@ class Graph{
 	Graph(int n, int m){
 		this->n=n;
 		this->m=m;
-		vector<vpi> adj;
+		vector<vpi> adj(n);
 	}
 
 	void inputGraph(){
-		adj.resize(n);
+        adj.resize(n);
 		while(m--){
 			int src, dest, wt;
 			cin>>src>>dest>>wt;
+            cout<<"inputted: "<<src<<" "<<dest<<" "<<wt<<endl;
 			adj[src].pb(mp(dest, wt));
+            cout<<"here";
 		}
+        cout<<"ended";
 	}
 
-	int bfs(){
+	long long bfs(){
 		int src=1;
-		unordered_map<int, int> odd, even;
+		vector<int> odd(n-1, 0);
+        vector<int> even(n-1, 0);
 		int nodesLeft=1, nodesNext=0, level=1;
 		vector<bool> vis(n, false);
 		vector<int> ans;
@@ -75,7 +79,11 @@ class Graph{
 				nodesNext=0;
 				level++;
 			}
-			if(level>1){
+		}
+        int lastLevel=level-1;
+        for(int i=1; i<lastLevel; i++){
+            if(level>1){
+                cout<<"came here";
 				if(level%2==0){
 					ans[level]=(ans[level-1]*even[level])+odd[level];
 				}
@@ -84,9 +92,9 @@ class Graph{
 			}
 			else
 				ans[level]=odd[level];
-			final+=ans[level];
-		}
-		return final;
+            fin+=ans[level];
+        }
+		return fin;
 	}
 
 };
@@ -97,8 +105,9 @@ int main(){
 	Graph g(n, n-1);
 	g.inputGraph();
 	//assume root is 1
-
-    cout<<g.bfs()<<endl;
+    cout<<"input done";
+    int ans=g.bfs();
+    //cout<<ans<<endl;
 
 	return 0;
 }
