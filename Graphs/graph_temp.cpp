@@ -71,6 +71,47 @@ class Graph{
         }
     }
 
+    void DFS_ts(int start, vector<bool>& vis, vector<int>& ans){
+        vis[start]=true;
+        for(auto it=adj[start].begin(); it!=adj[start].end(); it++){
+            if(!vis[ptr.fi]){
+                vis[ptr.fi]=true;
+                DFS_ts(ptr.fi, vis, ans);
+            }
+        }
+        ans.pb(start);
+    }
+
+    vector<int> topSort(){
+        vector<bool> vis(n, false);
+        vector<int> ans;
+        for(int i=0; i<n; i++){
+            if(!vis[i]){
+                DFS_ts(i, vis, ans);
+            }
+        }
+        //reverse ans and eturn
+        //ans.reverse();
+        return ans;
+    }
+
+    void edge_relax_ts(int start, vector<bool>& vis, vector<int>&dist){
+        vis[start]=true;
+        for(auto it=adj[start].begin(); it!=adj[start].end(); it++){
+            int newdist=dist[start]+ptr.se;
+            if(newdist<dist[ptr.fi]){
+                dist[ptr.fi]=newdist;
+            }
+        }
+    }
+
+    int topSort_shortestPath(int start, int end){
+        vector<int> topsort=topSort();
+        vector<int> dist(n, INT_MAX);
+        //INCOMPLETE
+        return dist[end];
+    }
+
     void DFS(int src, vector<bool>* visited){
         (*visited)[src]=true;
         cout<<src<<" ";
@@ -154,6 +195,8 @@ class Graph{
         else 
             return -1;
     }
+
+    
 
 
 };
